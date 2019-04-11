@@ -1,0 +1,19 @@
+<mat-card>
+    <form class="mat-field-form">
+        <mat-form-field class="mat-field-full-width">
+            <input type="url" matInput placeholder="{{'Route' | translate}}" [formControl]="urlFormControl" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="urlFormControl.hasError('pattern') && !urlFormControl.hasError('required')">
+                {{ 'Please enter a valid url' | translate }}
+            </mat-error>
+            <mat-error *ngIf="urlFormControl.hasError('required')">
+                {{ 'Url is required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="urlFormControl.hasError('pattern')">
+                {{ 'The url have to be like http:://r.com' | translate}}
+            </mat-error>    
+        </mat-form-field>
+    </form>              
+</mat-card>
+<mat-card>
+  
+</mat-card>
