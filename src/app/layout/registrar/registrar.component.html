@@ -1,0 +1,97 @@
+<mat-card>
+    <mat-card-title> Registrarse </mat-card-title>
+    <mat-card-content>
+      <div class="mb-20" fxLayout.lt-md="column" fxFlex fxLayoutGap="200px">
+        <form clas="usuario-form">
+          <!--<div fxFlex>-->
+          <div fxLayout="row">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                name="primerNombre"
+                placeholder="Primer Nombre"
+                [(ngModel)]="usuario.nombre"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                name="segundoNombre"
+                placeholder="Segundo Nombre"
+                [(ngModel)]="usuario.nombreSegundo"
+              />
+            </mat-form-field>
+          </div>
+          <!--</div>-->
+          <!--<div fxFlex>-->
+          <div fxLayout="row">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                name="segundoApellido"
+                placeholder="Primer Apellido"
+                [(ngModel)]="usuario.apellido"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                name="primerApellido"
+                placeholder="Segundo Apellido"
+                [(ngModel)]="usuario.apellidoSegundo"
+              />
+            </mat-form-field>
+          </div>
+          <!--</div>-->
+          <!--<div fxFlex>-->
+          <div fxLayout="row">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                name="nombreUsuario"
+                placeholder="Usuario"
+                [(ngModel)]="usuario.usuario"
+              />
+            </mat-form-field>
+            <!--<mat-form-field *ngIf="!actualizarUsuarioSucursal"> <input matInput  type="text" [(ngModel)]="nuevoUsuarioSucursal.password" name="contrasenia" placeholder="Contraseña" /> </mat-form-field>-->
+            <mat-form-field>
+              <input
+                matInput
+                type="password"
+                name="usuarioPassword"
+                placeholder="Contraseña"
+                [(ngModel)]="usuario.contrasenia"
+              />
+            </mat-form-field>  
+          </div>
+          <mat-form-field>
+              <input
+                matInput
+                type="text"
+                name="email"
+                placeholder="email"
+                [(ngModel)]="usuario.email"
+              />
+          </mat-form-field>
+          <!--</div>-->
+        </form>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <div fxLayout="row">
+            <button
+              mat-raised-button
+              class="boton-amarillo"
+            >
+              Guardar
+            </button>
+            <button mat-raised-button class="boton-rojo" (click)="cancelar()">Cancelar</button>
+          </div>
+    </mat-card-actions>
+  </mat-card>
+  

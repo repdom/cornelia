@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
         children: [
+            {
+                path: 'registrar',
+                component: RegistrarComponent
+            },
             {
                 path: '',
                 redirectTo: 'dashboard'

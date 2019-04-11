@@ -15,6 +15,8 @@ import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
+import { RegistrarModule } from './registrar/registrar.module';
+import { ComunesModule } from '../comunes/comunes.module';
 
 @NgModule({
     imports: [
@@ -27,7 +29,9 @@ import { NavComponent } from './nav/nav.component';
         MatInputModule,
         MatMenuModule,
         MatListModule,
-        TranslateModule
+        TranslateModule,
+        RegistrarModule,
+        ComunesModule
     ],
     declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
 })

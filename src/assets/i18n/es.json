@@ -31,8 +31,9 @@
     "Register": "Registrarse",
     "Sign in": "Iniciar sesión",
     "Please enter a valid email address": "Por favor entre un email válido",
-    "The url have to be like http:://ruta.com": "La url debe de cumplir el patrón http:://ruta.com",
+    "The url have to be like http://r.com": "La url debe de cumplir el patrón http://r.com",
     "Please enter a valid url": "Por favor entre una url válida",
     "Route": "Ruta",
-    "Url is required": "Url es requerido"
+    "Url is required": "Url es requerido",
+    "Add": "Agregar"
 }
