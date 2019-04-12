@@ -10,6 +10,7 @@ import { Config } from '../../../services/config';
 import { AcortarService } from '../../../services/acortador/acortar.service';
 import swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
+import * as crypto from 'crypto-js';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -40,6 +41,7 @@ export class AcortadorComponent implements OnInit {
   dataSource: MatTableDataSource<Url>;
   displayedColumns = ['url', 'urlCortada', 'acciones'];
   dominio = '';
+  usuario = '';
 
   urlFormControl = new FormControl('', [
     Validators.required,
@@ -59,8 +61,13 @@ export class AcortadorComponent implements OnInit {
     // const h1 = Md5.hashStr('1');
     // const h2 = Md5.hashStr('5', true);
     const b16 = bases.toBase16('250');
-    console.log(b16);
+    // console.log(crypto.AES.decrypt(this.cookieService.get('usuario'), 'contrasenia').toString(crypto.enc.Utf8));
     this.dominio = Config.dominioBase;
+    if (this.cookieService.check('usuario') === true) {
+      this.usuario = crypto.AES.decrypt(this.cookieService.get('usuario'), 'contrasenia').toString(crypto.enc.Utf8);
+    } else {
+      this.usuario = null;
+    }
   }
 
   agregarUrl() {
@@ -77,21 +84,41 @@ export class AcortadorComponent implements OnInit {
           console.log(error);
         }
       );*/
-      const url = {
-        url: this.urlFormControl.value,
-        hashMaked: Md5.hashAsciiStr(this.urlFormControl.value),
-        usuario: null,
-      };
-      this.acrotarService.create(url).subscribe(response => {
-        this.urlFormControl.setValue(`${Config.dominioBase}${response['hashMaked']}`);
-      }, (error) => {
-        swal.fire({
-          type: 'error',
-          title: 'Oops...',
-          text: 'Algo malo sucedió, vuelva a intentarlo. Revise conexión de internet.',
+      if (this.usuario !== null) {
+        const url2 = {
+          url: this.urlFormControl.value,
+          hashMaked: Md5.hashAsciiStr(this.urlFormControl.value),
+          usuario: null,
+        };
+        this.acrotarService.porUsuario(this.usuario, url2).subscribe(response => {
+          console.log(response);
+          this.urlFormControl.setValue(`${Config.dominioBase}${response['hashMaked']}`);
+        }, (error) => {
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Algo malo sucedió, vuelva a intentarlo. Revise conexión de internet.',
+          });
+        }, () => {
+
         });
-      }, () => {
-      });
+      } else {
+        const url2 = {
+          url: this.urlFormControl.value,
+          hashMaked: Md5.hashAsciiStr(this.urlFormControl.value),
+          usuario: null,
+        };
+        this.acrotarService.create(url2).subscribe(response => {
+          this.urlFormControl.setValue(`${Config.dominioBase}${response['hashMaked']}`);
+        }, (error) => {
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Algo malo sucedió, vuelva a intentarlo. Revise conexión de internet.',
+          });
+        }, () => {
+        });
+    }
   }
 
   listarUrls() {

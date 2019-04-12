@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import * as crypto from 'crypto-js';
 
 @Component({
     selector: 'app-sidebar',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
     public showMenu: string;
-    constructor() {}
+    esAdministrador = false;
+    constructor(private cookieService: CookieService) {}
 
     ngOnInit() {
         this.showMenu = '';
+        setInterval(() => {
+            if (this.cookieService.check('usuario') !== false && this.cookieService.check('contrasenia') !== false) {
+                if (Boolean(crypto.AES.decrypt(this.cookieService.check('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
+                    this.esAdministrador = true;
+                }
+            }
+            // console.log('pasando');
+        }, 1000);
     }
 
     addExpandClass(element: any) {

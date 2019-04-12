@@ -19,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RedireccionComponent } from './redireccion/redireccion.component';
 import { RedireccionModule } from './redireccion/redireccion.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -41,6 +43,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         HttpClientModule,
         MatToolbarModule,
         RedireccionModule,
+        NgxSpinnerModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

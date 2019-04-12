@@ -1,11 +1,11 @@
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { AcortadorComponent } from './acortador/acortador.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatCardModule, MatIconModule, MatTableModule, MatFormFieldModule, MatInputModule,
         MatPaginatorModule,
-        MatSortModule} from '@angular/material';
+        MatSortModule, MatListModule} from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { StatModule } from '../../shared/modules/stat/stat.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -15,6 +15,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AcortarService } from '../../services/acortador/acortar.service';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
+import { TablaurlComponent } from './tablaurl/tablaurl.component';
+import { StatsService } from '../../services/services/stats.service';
+import { ChartsModule as Ng2Charts } from 'ng2-charts';
 
 @NgModule({
     imports: [
@@ -34,11 +37,15 @@ import { CookieService } from 'ngx-cookie-service';
         MatPaginatorModule,
         MatSortModule,
         HttpModule,
+        MatListModule,
+        Ng2Charts,
         FlexLayoutModule.withConfig({addFlexToParent: false})
     ],
-    declarations: [DashboardComponent, AcortadorComponent],
+    declarations: [DashboardComponent, AcortadorComponent, TablaurlComponent],
     providers: [
         AcortarService,
+        StatsService,
+        DatePipe
     ]
 })
 export class DashboardModule {}

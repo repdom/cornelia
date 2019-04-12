@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface PeriodicElement {
     name: string;
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     displayedColumns = ['position', 'name', 'weight', 'symbol'];
     dataSource = new MatTableDataSource(ELEMENT_DATA);
     places: Array<any> = [];
+    logueado = false;
 
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); // Remove whitespace
@@ -34,7 +36,7 @@ export class DashboardComponent implements OnInit {
         this.dataSource.filter = filterValue;
     }
 
-    constructor() {
+    constructor(private cookieService: CookieService) {
         this.places = [
             {
                 imgSrc: 'assets/images/card-1.jpg',
@@ -66,5 +68,9 @@ export class DashboardComponent implements OnInit {
         ];
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.cookieService.check('usuario') !== false && this.cookieService.check('contrasenia') !== false) {
+            this.logueado = true;
+          }
+    }
 }

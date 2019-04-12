@@ -25,6 +25,17 @@ export class UsuarioService extends DataService {
       );
   }
 
+  getUrls(usuario: string) {
+    const headers = new Headers({ 'Accept': 'application/json', 'Content-Type': 'application/json'});
+    // headers.append('Authorization', this.cookieService);
+    const options = new RequestOptions({ headers: headers });
+    return this.http.get(this.url + 'urls/' + usuario, options)
+      .pipe(
+        map(response => response.json()),
+        catchError(this.handlerError)
+      );
+  }
+
   estaLogeado(logueado: boolean, admin?: boolean) {
     return Observable.create((logueado) => {
 
