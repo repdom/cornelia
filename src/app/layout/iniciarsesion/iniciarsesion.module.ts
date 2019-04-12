@@ -1,6 +1,6 @@
+import { IniciarsesionComponent } from './iniciarsesion.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegistrarComponent } from './registrar.component';
 import {
   MatInputModule,
   MatCheckboxModule,
@@ -19,11 +19,12 @@ import {
   MatSortModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { UsuarioService } from '../../services/usuario/usuario.service';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
-    RegistrarComponent
+    IniciarsesionComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +48,7 @@ import { UsuarioService } from '../../services/usuario/usuario.service';
     FlexLayoutModule.withConfig({addFlexToParent: false})
   ],
   providers: [
-    UsuarioService
+    CookieService
   ]
 })
-export class RegistrarModule { }
+export class IniciarsesionModule { }

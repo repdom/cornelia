@@ -15,12 +15,14 @@
             <mat-icon>cloud_download</mat-icon> {{ 'Download Now' | translate }}
         </a>-->
         <!--<a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/registrar']">-->
-        <button [routerLinkActive]="'active'" [routerLink]="['/registrar']" mat-button style="margin-right: 10%;"> {{ 'Register' | translate }}
+        <button [routerLinkActive]="'active'" [routerLink]="['/registrar']" mat-button style="margin-right: 10%;" *ngIf="!estaLogeado"> {{ 'Register' | translate }}
         </button>
         <!--</a-->
-        <button mat-button style="margin-right: 10%;"> {{ 'Sign in' | translate }}</button>
+        <button  [routerLinkActive]="'active'" [routerLink]="['/login']" mat-button style="margin-right: 10%;" *ngIf="!estaLogeado"> {{ 'Sign in' | translate }}</button>
         <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="language">
             <mat-icon>language</mat-icon>
+        </button>
+        <button [routerLinkActive]="'active'" [routerLink]="['/registrar']" mat-button style="margin-right: 10%;" *ngIf="esAdministrador"> {{ 'Admin panel' | translate }}
         </button>
         <mat-menu #language="matMenu">
             <button mat-menu-item (click)="changeLang('en')">

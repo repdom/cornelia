@@ -17,6 +17,8 @@ import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 import { RegistrarModule } from './registrar/registrar.module';
 import { ComunesModule } from '../comunes/comunes.module';
+import { IniciarsesionModule } from './iniciarsesion/iniciarsesion.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     imports: [
@@ -31,8 +33,12 @@ import { ComunesModule } from '../comunes/comunes.module';
         MatListModule,
         TranslateModule,
         RegistrarModule,
-        ComunesModule
+        ComunesModule,
+        IniciarsesionModule,
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
+    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent],
+    providers: [
+        CookieService
+    ]
 })
 export class LayoutModule {}

@@ -9,6 +9,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Config } from '../../../services/config';
 import { AcortarService } from '../../../services/acortador/acortar.service';
 import swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -42,7 +43,7 @@ export class AcortadorComponent implements OnInit {
 
   urlFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'),
+    Validators.pattern('(https?://)([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'),
   ]);
 
   matcher = new MyErrorStateMatcher();
@@ -51,7 +52,8 @@ export class AcortadorComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private translate: TranslateService,
-              private changeDetectorRefs: ChangeDetectorRef, private acrotarService: AcortarService) { }
+              private changeDetectorRefs: ChangeDetectorRef, private acrotarService: AcortarService,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
     // const h1 = Md5.hashStr('1');
@@ -89,7 +91,6 @@ export class AcortadorComponent implements OnInit {
           text: 'Algo malo sucedió, vuelva a intentarlo. Revise conexión de internet.',
         });
       }, () => {
-
       });
   }
 

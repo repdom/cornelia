@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AcortarService } from '../../services/acortador/acortar.service';
 import { HttpModule } from '@angular/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     imports: [
@@ -37,7 +38,7 @@ import { HttpModule } from '@angular/http';
     ],
     declarations: [DashboardComponent, AcortadorComponent],
     providers: [
-        AcortarService
+        AcortarService,
     ]
 })
 export class DashboardModule {}
