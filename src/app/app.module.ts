@@ -20,6 +20,10 @@ import { AppComponent } from './app.component';
 import { RedireccionComponent } from './redireccion/redireccion.component';
 import { RedireccionModule } from './redireccion/redireccion.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatLinkPreviewModule } from '@angular-material-extensions/link-preview';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -51,6 +55,8 @@ export const createTranslateLoader = (http: HttpClient) => {
                 deps: [HttpClient]
             }
         }),
+        MatLinkPreviewModule.forRoot(),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
     providers: [],
     bootstrap: [AppComponent]

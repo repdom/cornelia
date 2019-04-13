@@ -20,19 +20,22 @@ export class TopnavComponent implements OnInit {
                 this.toggleSidebar();
             }
         });
-    }
-
-    ngOnInit() {
-        this.pushRightClass = 'push-right';
         setInterval(() => {
             if (this.coockieService.check('usuario') !== false && this.coockieService.check('contrasenia') !== false) {
                 this.estaLogeado = true;
                 if (Boolean(crypto.AES.decrypt(this.coockieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
                     this.esAdministrador = true;
                 }
+            } else {
+                this.estaLogeado = false;
+                this.esAdministrador = false;
             }
             // console.log('pasando');
         }, 100);
+    }
+
+    ngOnInit() {
+        this.pushRightClass = 'push-right';
     }
 
     isToggled(): boolean {
@@ -46,7 +49,8 @@ export class TopnavComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        this.coockieService.delete('usuario');
+        this.coockieService.delete('contrasenia');
         this.router.navigate(['/login']);
     }
 

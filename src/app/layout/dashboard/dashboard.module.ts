@@ -18,6 +18,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { TablaurlComponent } from './tablaurl/tablaurl.component';
 import { StatsService } from '../../services/services/stats.service';
 import { ChartsModule as Ng2Charts } from 'ng2-charts';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { MatLinkPreviewModule } from '@angular-material-extensions/link-preview';
+
 
 @NgModule({
     imports: [
@@ -39,7 +42,9 @@ import { ChartsModule as Ng2Charts } from 'ng2-charts';
         HttpModule,
         MatListModule,
         Ng2Charts,
-        FlexLayoutModule.withConfig({addFlexToParent: false})
+        NgxQRCodeModule,
+        FlexLayoutModule.withConfig({addFlexToParent: false}),
+        MatLinkPreviewModule,
     ],
     declarations: [DashboardComponent, AcortadorComponent, TablaurlComponent],
     providers: [

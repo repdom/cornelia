@@ -27,6 +27,7 @@ export class Url {
   public hash = '';
   public logueado = '';
   public usuario = '';
+  public dominioAcortado?: string;
 }
 
 @Component({

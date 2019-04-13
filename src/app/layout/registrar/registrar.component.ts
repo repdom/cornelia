@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export class Usuario {
   public nombre = '';
@@ -20,7 +22,9 @@ export class Usuario {
 export class RegistrarComponent implements OnInit {
   usuario: Usuario = new Usuario();
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService,
+              private router: Router,
+              private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
   }
@@ -40,13 +44,15 @@ export class RegistrarComponent implements OnInit {
       email: this.usuario.email,
       rol: 'Usuario',
     };
-
+    this.spinnerService.show();
     this.usuarioService.create(usuario).subscribe(response => {
       console.log(response);
     }, (error) => {
       throw new Error(error);
     }, () => {
+      this.spinnerService.hide();
       this.usuario = new Usuario();
+      this.router.navigate(['/login']);
     });
 
   }

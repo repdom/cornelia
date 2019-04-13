@@ -19,6 +19,7 @@ import { RegistrarModule } from './registrar/registrar.module';
 import { ComunesModule } from '../comunes/comunes.module';
 import { IniciarsesionModule } from './iniciarsesion/iniciarsesion.module';
 import { CookieService } from 'ngx-cookie-service';
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { CookieService } from 'ngx-cookie-service';
         RegistrarModule,
         ComunesModule,
         IniciarsesionModule,
+        AdminPanelModule
     ],
     declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent],
     providers: [

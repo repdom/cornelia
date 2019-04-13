@@ -10,18 +10,23 @@ import * as crypto from 'crypto-js';
 export class SidebarComponent implements OnInit {
     public showMenu: string;
     esAdministrador = false;
-    constructor(private cookieService: CookieService) {}
-
-    ngOnInit() {
-        this.showMenu = '';
+    constructor(private cookieService: CookieService) {
         setInterval(() => {
             if (this.cookieService.check('usuario') !== false && this.cookieService.check('contrasenia') !== false) {
-                if (Boolean(crypto.AES.decrypt(this.cookieService.check('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
+                if (Boolean(crypto.AES.decrypt(this.cookieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
                     this.esAdministrador = true;
+                } else {
+                    this.esAdministrador = false;
                 }
+            } else {
+                this.esAdministrador = false;
             }
             // console.log('pasando');
         }, 1000);
+    }
+
+    ngOnInit() {
+        this.showMenu = '';
     }
 
     addExpandClass(element: any) {

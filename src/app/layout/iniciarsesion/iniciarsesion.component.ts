@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import * as crypto from 'crypto-js';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-iniciarsesion',
@@ -15,7 +16,8 @@ export class IniciarsesionComponent implements OnInit {
   contrasenia: string;
 
   constructor(private usuarioService: UsuarioService,
-              private router: Router, private cookieService: CookieService) { }
+              private router: Router, private cookieService: CookieService,
+              private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     if (this.cookieService.check('usuario') !== false && this.cookieService.check('contrasenia') !== false) {
@@ -25,6 +27,7 @@ export class IniciarsesionComponent implements OnInit {
 
   onLogin() {
     // localStorage.setItem('isLoggedin', 'true');
+    this.spinnerService.show();
     this.usuarioService.logearse(this.usuario, this.contrasenia).subscribe(response => {
       if (response !== null) {
         this.cookieService.set('usuario', crypto.AES.encrypt(this.usuario, 'contrasenia'), 5000);
@@ -32,6 +35,7 @@ export class IniciarsesionComponent implements OnInit {
         this.cookieService.set('esAdmin', crypto.AES.encrypt((response['rol'] === 'manager' ? 'true' : 'false'), 'contrasenia', 5000));
         this.router.navigate(['/dashboard']);
       } else {
+        this.spinnerService.hide();
         Swal.fire({
           type: 'error',
           title: 'Oops...',
@@ -40,9 +44,10 @@ export class IniciarsesionComponent implements OnInit {
       }
       // console.log(response);
     }, (error) => {
-
+      this.spinnerService.hide();
     }, () => {
       // this.cookieService.set('')
+      this.spinnerService.hide();
     });
   }
 

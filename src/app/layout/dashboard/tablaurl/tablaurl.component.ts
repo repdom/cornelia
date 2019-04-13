@@ -31,7 +31,7 @@ export class GraficoFecha {
 })
 export class TablaurlComponent implements OnInit {
   dataSource: MatTableDataSource<Url>;
-  displayedColumns = ['url', 'urlCortada', 'acciones'];
+  displayedColumns = ['url', 'urlCortada', 'qr', 'preview', 'acciones'];
   dominio = '';
   urls: Url[] = [];
   usuario = '';
@@ -46,6 +46,7 @@ export class TablaurlComponent implements OnInit {
   };
   public barChartLegend: boolean;
   public barChartType: string;
+  qrType = 'url';
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -98,6 +99,7 @@ export class TablaurlComponent implements OnInit {
           hash: element['hashMaked'],
           logueado: '',
           usuario: this.usuario,
+          dominioAcortado: this.dominio + '/' + element['hashMaked'],
         }
       );
       // console.log(element);

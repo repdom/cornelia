@@ -24,6 +24,9 @@
         </button>
         <!--<button [routerLinkActive]="'active'" [routerLink]="['/registrar']" mat-button style="margin-right: 10%;" *ngIf="esAdministrador"> {{ 'Admin panel' | translate }}
         </button>-->
+        <button mat-icon-button mat-button *ngIf="estaLogeado" (click)="onLoggedout()">
+                <mat-icon>exit_to_app</mat-icon>
+        </button>    
         <mat-menu #language="matMenu">
             <button mat-menu-item (click)="changeLang('en')">
                 <span>{{ 'English' | translate }}</span>
@@ -49,7 +52,4 @@
                 <span>{{ 'Settings' | translate }}</span>
             </button>
         </mat-menu>-->
-        <!--<button mat-icon-button (click)="onLoggedout()">
-            <mat-icon>exit_to_app</mat-icon>
-        </button>-->
     </mat-toolbar>

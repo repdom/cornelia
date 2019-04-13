@@ -6,7 +6,22 @@
           </ng-container>
           <ng-container matColumnDef="urlCortada">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Url cortada</th>
-              <td mat-cell *matCellDef="let element">{{dominio}}/{{element.hash}}</td>
+              <td mat-cell *matCellDef="let element">{{element.dominioAcortado}}</td>
+          </ng-container>
+          <ng-container matColumnDef="qr">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>QR</th>
+                <td mat-cell *matCellDef="let element">
+                        <ngx-qrcode [qrc-element-type]="qrType" [qrc-value]="element.dominioAcortado">
+                        </ngx-qrcode>                            
+                </td>  
+          </ng-container>
+          <ng-container matColumnDef="preview">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Preview</th>
+                <td mat-cell *matCellDef="let element">
+                        <a href="{{element.dominio}}" class="link-preview">
+                            {{element.dominio}}
+                        </a>
+                </td>  
           </ng-container>
           <ng-container matColumnDef="acciones">
               <th mat-header-cell *matHeaderCellDef>Acciones</th>
@@ -24,7 +39,6 @@
   <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
   </mat-paginator>
 </div>
-
 <mat-card *ngIf="mostrarChart">
         <mat-card-header>
             <mat-card-title>Cantidad de visitas por fecha</mat-card-title>
