@@ -43,13 +43,15 @@ export class AdminPanelComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.spinnerService.show();
     if (this.cookieService.check('usuario') !== false && this.cookieService.check('contrasenia') !== false) {
-      if (Boolean(crypto.AES.decrypt(this.cookieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
+      if (crypto.AES.decrypt(this.cookieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8) === 'true') {
+        this.listarUsuarios();
       } else {
+        this.spinnerService.hide();
         this.router.navigate(['/dashboard']);
       }
     }
-    this.listarUsuarios();
   }
   listarUsuarios() {
     this.spinnerService.show();

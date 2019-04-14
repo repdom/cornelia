@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
     constructor(private cookieService: CookieService) {
         setInterval(() => {
             if (this.cookieService.check('usuario') !== false && this.cookieService.check('contrasenia') !== false) {
-                if (Boolean(crypto.AES.decrypt(this.cookieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
+                if (crypto.AES.decrypt(this.cookieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8) === 'true') {
                     this.esAdministrador = true;
                 } else {
                     this.esAdministrador = false;

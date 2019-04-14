@@ -32,6 +32,7 @@ export class IniciarsesionComponent implements OnInit {
       if (response !== null) {
         this.cookieService.set('usuario', crypto.AES.encrypt(this.usuario, 'contrasenia'), 5000);
         this.cookieService.set('contrasenia', crypto.AES.encrypt(this.contrasenia, 'contrasenia'), 5000);
+        console.log(response['rol'] === 'manager' ? 'true' : 'false');
         this.cookieService.set('esAdmin', crypto.AES.encrypt((response['rol'] === 'manager' ? 'true' : 'false'), 'contrasenia', 5000));
         this.router.navigate(['/dashboard']);
       } else {

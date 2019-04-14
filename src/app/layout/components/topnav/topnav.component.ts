@@ -23,7 +23,7 @@ export class TopnavComponent implements OnInit {
         setInterval(() => {
             if (this.coockieService.check('usuario') !== false && this.coockieService.check('contrasenia') !== false) {
                 this.estaLogeado = true;
-                if (Boolean(crypto.AES.decrypt(this.coockieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8)) === true) {
+                if (crypto.AES.decrypt(this.coockieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8) === 'true') {
                     this.esAdministrador = true;
                 }
             } else {
