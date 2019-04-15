@@ -20,22 +20,22 @@ export class TopnavComponent implements OnInit {
                 this.toggleSidebar();
             }
         });
-        setInterval(() => {
-            if (this.coockieService.check('usuario') !== false && this.coockieService.check('contrasenia') !== false) {
-                this.estaLogeado = true;
-                if (crypto.AES.decrypt(this.coockieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8) === 'true') {
-                    this.esAdministrador = true;
-                }
-            } else {
-                this.estaLogeado = false;
-                this.esAdministrador = false;
-            }
+       // setInterval(() => {
             // console.log('pasando');
-        }, 100);
+       // }, 100);
     }
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        if (this.coockieService.check('usuario') !== false && this.coockieService.check('contrasenia') !== false) {
+            this.estaLogeado = true;
+            if (crypto.AES.decrypt(this.coockieService.get('esAdmin'), 'contrasenia').toString(crypto.enc.Utf8) === 'true') {
+                this.esAdministrador = true;
+            }
+        } else {
+            this.estaLogeado = false;
+            this.esAdministrador = false;
+        }
     }
 
     isToggled(): boolean {
